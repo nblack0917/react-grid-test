@@ -1,0 +1,16 @@
+.gridBox {
+  background: darkcyan;
+}
+
+.layout {
+  /* background: darkkhaki; */
+  width: 700px;
+  margin: 0 auto;
+}
+
+.gridContainer {
+  background: darkkhaki;
+  width: 700px;
+  height: 500px;
+  margin: 0 auto;
+}
