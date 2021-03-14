@@ -1,5 +1,8 @@
 .gridBox {
-  background: darkcyan;
+  background: #ddd3b8;
+  border: 3px solid #c77547;
+  border-radius: 5px;
+  /* margin-bottom: 10px; */
 }
 
 .layout {
@@ -10,7 +13,24 @@
 
 .gridContainer {
   background: darkkhaki;
-  width: 700px;
+  width: 643px;
   height: 500px;
   margin: 0 auto;
+}
+
+.lastElement {
+  /* display: none; */
+  background: darkmagenta;
+}
+
+.round {
+  background: #ddd3b8;
+  border: 3px solid #c77547;
+  border-radius: 5px;
+  border-radius: 50%;
+}
+
+.droppable-element {
+  width: 75px;
+  background: darkseagreen;
 }
