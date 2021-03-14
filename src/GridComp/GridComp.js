@@ -54,14 +54,14 @@ class MyFirstGrid extends React.Component {
       generateDOM() {
         let lastItem = this.state.layoutList.length - 1
         return _.map(_.range(itemNum), function(i) {
-            console.log(i)
+            // console.log(i)
             if ( i===2 || i === 4 || i === 5 || i === 6) {
                 return (
                     <div key={i} className="round">
                       <span className="text">{i}</span>
                     </div>
                   );
-            } else if ( i==lastItem) {
+            } else if ( i===lastItem) {
                 return (
                     <div key={i} className="lastElement">
                       {/* <span className="text">{i}</span> */}
@@ -103,7 +103,7 @@ class MyFirstGrid extends React.Component {
       }
       onDrop = (layout, layoutItem, _event) => {
         // alert(`Dropped element props:\n${JSON.stringify(layoutItem, ['x', 'y', 'w', 'h'], 2)}`);
-        // console.log("layout before", layout)
+        console.log("layout before", layout)
         let stateList = this.state.layoutList
         const itemX= layoutItem.x; const itemY= layoutItem.y; const itemW= layoutItem.w; const itemH= layoutItem.h;
         console.log(layoutItem)
@@ -120,15 +120,15 @@ class MyFirstGrid extends React.Component {
         //         break;
         //     }
         // }
-        stateList.pop()
+        layout.pop()
         itemNum++;
         // this.state.layout.items++
-        stateList.push(newItem)
-        stateList.push(newLastItem)
+        layout.push(newItem)
+        layout.push(newLastItem)
         console.log("itemX", itemX)
         console.log("stateList", stateList)
         this.setState({ layoutList: stateList})
-        // console.log("layout after", this.state.layoutList)
+        console.log("layout after", layout)
         // console.log("lastItem", lastItem)
         // console.log("newIString", newIString)
         // console.log("itemNum", itemNum)
@@ -138,8 +138,10 @@ class MyFirstGrid extends React.Component {
 
       };
 
-      componentDidUpdate() {
+      componentDidUpdate(layout) {
           this.generateDOM()
+          this.onLayoutChange(layout)
+        //   console.log(this.state.layoutList)
       }
 
   render() {
