@@ -8,7 +8,6 @@ import './GridComp.css'
 const ReactGridLayout = WidthProvider(RGL);
 
 let itemNum = 9;
-let nextItemNum = 0;
 
 class MyFirstGrid extends React.Component {
     static defaultProps = {
@@ -45,6 +44,8 @@ class MyFirstGrid extends React.Component {
             {w: 2, h: 2, isPlanter: true},
         ],
         currentSize: {} };
+        this.onDragStop = this.onDragStop.bind(this);
+        this.generateDOM = this.generateDOM.bind(this);
       }
 
       //builds list of items based on value of i
@@ -77,10 +78,31 @@ class MyFirstGrid extends React.Component {
 
       onLayoutChange(layout) {
         this.props.onLayoutChange(layout);
+        // this.generateDOM()
       }
-
+      
       onDragStop(layout) {
-          console.log(layout)
+        let stateList = this.state.layoutList
+        let newStateList = []
+        console.log(layout)
+
+        for ( let gridItem of layout) {
+          console.log("gridItem from Layout", gridItem)
+          let currentItem = stateList.filter(listItem => listItem.i === gridItem.i );
+          console.log("current Item", currentItem[0])
+          if ( currentItem[0].x !== gridItem.x || currentItem[0].y !== gridItem.y ) {
+            console.log("grid item changed")
+            currentItem[0].x = gridItem.x;
+            currentItem[0].y = gridItem.y;
+          }
+          newStateList.push(currentItem[0])
+        }
+        // let newLayout = layout;
+        // layout = this.state.layoutList
+        this.setState({ layoutList: newStateList })
+        // this.generateDOM()
+        // console.log("layoutList", this.state.layoutList)
+          // console.log("layout",layout)
       }
 
       //When new item is dropped from outside...
@@ -93,6 +115,7 @@ class MyFirstGrid extends React.Component {
       //set state to state copy
 
       onDrop = (layout, layoutItem, _event) => {
+        
 
         let newItemSize = this.state.currentSize
         console.log(newItemSize)
@@ -110,7 +133,6 @@ class MyFirstGrid extends React.Component {
   
         stateList.pop()
         itemNum++;
-        nextItemNum++;
         stateList.push(newItem);
         stateList.push(newLastItem)
         // console.log("stateList", stateList)
