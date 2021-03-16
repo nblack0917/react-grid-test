@@ -24,8 +24,8 @@
 }
 
 .lastElement {
-  /* display: none; */
-  background: darkmagenta;
+  display: none;
+  /* background: darkmagenta; */
 }
 
 .round {
